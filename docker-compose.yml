@@ -1,0 +1,36 @@
+services:
+  tuum-app-api:
+    container_name: tuum-app-api
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tuum-postgres-db:5432/tuum-postgres-db
+      - SPRING_DATASOURCE_USERNAME=tuum
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_DATASOURCE_INITIALIZATION_MODE=always
+      - SPRING_RABBITMQ_HOST=tuum_rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+
+  tuum-postgres-db:
+    container_name: tuum-postgres-db
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=tuum
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tuum-postgres-db
+
+  rabbitmq:
+    container_name: tuum_rabbitmq
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+networks:
+  default:
+    external:
+      name: tuum
