@@ -36,7 +36,7 @@ but I decided to have them as a separate database table.
 This might not be so critical in this application but in general made sense
 since currencies could be added to the system and having them as an enum would mean restarting the whole system.
 However, enums made sense for transaction directions since transactions can only have two directions 
-(Although now thinking about it would be) 
+(Although now thinking about it could be better to have the transactionDirection field as a boolean instead). 
 
 ## Estimated transactions per second
 It is rather difficult to say the transactions per second number without doing any load testing.
